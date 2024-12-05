@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { AuthProvider, AuthContext } from './context/AuthContext';
 import Home from './components/Home/Home';
 import Calendar from './components/Calendar/Calendar';
 import Gallery from './components/Gallery/Gallery';
@@ -9,11 +10,23 @@ import darakLogo from './darak_logo.png'
 import './App.css';
 
 function App() {
+  const { authToken, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
-      <Router>
+    <Router>
         <div className="vertical-layout">
           <div className="logo-container">
             <img src= {darakLogo} alt="Club Logo" className="club-logo" />
+            <div className="auth-button-container">
+            {authToken ? (
+              <Link to="/profile" className="auth-button">회원정보</Link>
+            ) : (
+              <Link to="/login" className="auth-button">로그인</Link>
+            )}
+          </div>
           </div>
           <div className="app-container centered-container">
             <div className="content-container fixed-size">
