@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken') || null);
-  const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     if (authToken) {
@@ -13,32 +13,34 @@ export const AuthProvider = ({ children }) => {
       fetchUserProfile();
     } else {
       localStorage.removeItem('authToken');
-      setUser(null);
+      setUserRole(null);
     }
   }, [authToken]);
 
   const fetchUserProfile = async () => {
     try {
+      console.log('Authorization Header:', `Bearer ${authToken}`);
       const response = await axios.get('/api/auth/profile', {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      setUser(response.data);
+      setUserRole(response.data);
     } catch (error) {
       console.error('Error fetching user profile:', error);
       setAuthToken(null);
+      localStorage.removeItem('authToken');
     }
   };
 
   const logout = () => {
     setAuthToken(null);
-    setUser(null);
+    setUserRole(null);
     localStorage.removeItem('authToken');
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, setAuthToken, user, logout }}>
+    <AuthContext.Provider value={{ authToken, setAuthToken, userRole, setUserRole, logout }}>
       {children}
     </AuthContext.Provider>
   );

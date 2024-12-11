@@ -61,7 +61,7 @@ function Register() {
   return (
     <div className="register-container">
       <form className="register-card" onSubmit={handleSubmit}>
-        <h2>Register</h2>
+        <h2>회원가입</h2>
         <div className="profile-image-container">
           <label className="profile-image-button">
             {profileImageFile ? (
@@ -107,20 +107,20 @@ function Register() {
           <label>
             <input
               type="radio"
-              value="일원"
-              checked={role === '일원'}
+              value="member"
+              checked={role === 'member'}
               onChange={(e) => setRole(e.target.value)}
             />
-            Member
+            부원
           </label>
           <label>
             <input
               type="radio"
-              value="관리자"
-              checked={role === '관리자'}
+              value="admin"
+              checked={role === 'admin'}
               onChange={(e) => setRole(e.target.value)}
             />
-            Admin
+            관리자
           </label>
         </div>
 
@@ -134,7 +134,7 @@ function Register() {
           />
         )}
 
-        <button className="submit-button" type="submit">Register</button>
+        <button className="submit-button" type="submit">회원가입</button>
       </form>
     </div>
   );

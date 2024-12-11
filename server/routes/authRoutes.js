@@ -85,7 +85,7 @@ router.post('/login', async (req, res) => {
     }
 
     // 토큰 생성
-    const token = jwt.sign({ username: user.usernmae }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token });
   } catch (error) {
     console.error('Error during login:', error);
@@ -93,16 +93,16 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
-
 // 프로필 정보 라우트
 router.get('/profile', authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.user.username);
+    console.log('Decoded user from token:', req.user); // 디코드된 사용자 정보 확인
+    const user = await User.findOne({ username: req.user.username }); // DB 쿼리
     if (!user) {
+      console.log('User not found in database');
       return res.status(404).json({ message: 'User not found' });
     }
-
+    console.log('User found:', user);
     res.json({
       username: user.username,
       name: user.name,
@@ -110,8 +110,33 @@ router.get('/profile', authMiddleware, async (req, res) => {
       profileImage: user.profileImage,
     });
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching profile', error });
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Error fetching profile' });
   }
 });
+
+router.put('/profile', authMiddleware, upload.single('profileImage'), async (req, res) => {
+  try {
+    const { name } = req.body;
+    const profileImage = req.file ? req.file.path : undefined;
+
+    const updates = {};
+    if (name) updates.name = name;
+    if (profileImage) updates.profileImage = profileImage;
+
+    const user = await User.findOneAndUpdate(
+      { username: req.user.username }, // 필터 조건
+      updates, // 업데이트할 내용
+      { new: true } // 업데이트된 문서를 반환
+    );
+
+    res.status(200).json({ message: 'Profile updated successfully', user });
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).json({ message: 'Error updating profile', error });
+  }
+});
+
+
 
 module.exports = router;

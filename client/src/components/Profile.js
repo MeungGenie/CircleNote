@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 
 function Profile() {
-  const { authToken, setAuthToken, user } = useContext(AuthContext);
+  const { authToken, userRole, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   if (!authToken) {
@@ -13,22 +13,45 @@ function Profile() {
   }
 
   const handleLogout = () => {
-    setAuthToken(null);
-    localStorage.removeItem('authToken');
+    logout();
     navigate('/login');
   };
 
+  const handleEdit = () => {
+    navigate('/profile/edit');
+  };
+
+  console.log('User Role:', userRole); // 역할 정보 확인
+  console.log('Profile Image:', userRole?.profileImage); // 이미지 경로 확인
+
   return (
     <div className="profile-container">
-      <h2>회원정보</h2>
-      <div className="profile-details">
-        <img src={user.photo || '/default-avatar.png'} alt="프로필 사진" className="profile-avatar" />
-        <p><strong>이름:</strong> {user.username}</p>
-        <p><strong>역할:</strong> {user.role === 'admin' ? '임원진' : '일반부원'}</p>
+      <div className="profile-card">
+        <h2>회원정보</h2>
+        <div className="profile-details">
+          <div className="profile-avatar-container">
+            <img
+              src={`http://localhost:5001/${userRole?.profileImage || 'default-avatar.png'}`}
+              alt="프로필 사진"
+              className="profile-avatar"
+            />
+          </div>
+          <p>
+            <strong>이름:</strong> {userRole?.name || '이름 없음'}
+          </p>
+          <p>
+            <strong>역할:</strong> {userRole?.role === 'admin' ? '임원진' : '일반부원'}
+          </p>
+        </div>
+        <div className="profile-actions">
+          <button className="edit-button" onClick={handleEdit}>
+            수정
+          </button>
+          <button className="logout-button" onClick={handleLogout}>
+            로그아웃
+          </button>
+        </div>
       </div>
-      <button className="logout-button" onClick={handleLogout}>
-        로그아웃
-      </button>
     </div>
   );
 }

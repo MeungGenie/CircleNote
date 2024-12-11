@@ -45,9 +45,9 @@ function Home() {
           {intro ? (
             <>
               <h2>{intro.title}</h2>
-              {userRole === 'admin' && (
+              {userRole?.role === 'admin' && (
                 <button
-                onClick={() => navigate('/IntroEdit')} style={{ padding: '5px 10px', cursor: 'pointer' }}>
+                onClick={() => navigate('/intro/edit')} className='edit-button'>
                   수정
                 </button>
               )}
@@ -59,6 +59,11 @@ function Home() {
         </div>
         <div className="home-notices">
           <h2>📢 공지사항</h2>
+          {userRole?.role === 'admin' && (
+            <button onClick={() => navigate('/notices/edit')} className="edit-button">
+              글쓰기
+            </button>
+            )}
             {notices.length > 0 ? (
             notices.map((notice) => (
               <div key={notice._id}>

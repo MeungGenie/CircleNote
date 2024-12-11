@@ -10,6 +10,7 @@ import Members from './components/Members/Members';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
+import ProfileEdit from './components/ProfileEdit';
 import IntroEdit from './components/Home/IntroEdit';
 import NoticesEdit from './components/Home/NoticesEdit';
 import './App.css';
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/edit" element={<ProfileEdit />} />
               </Routes>
             </div>
             <div className="side-tabs">

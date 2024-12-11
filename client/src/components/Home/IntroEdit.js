@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function IntroEdit() {
+  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const navigate = useNavigate();
 
@@ -12,6 +13,7 @@ function IntroEdit() {
         const response = await fetch('http://localhost:5001/api/intro');
         if (response.ok) {
           const data = await response.json();
+          setTitle(data.title || '');
           setContent(data.content || '');
         }
       } catch (error) {
@@ -30,12 +32,12 @@ function IntroEdit() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({ title, content }),
       });
 
       if (response.ok) {
         alert('동아리 소개글이 저장되었습니다.');
-        navigate('/home');
+        navigate('/');
       } else {
         alert('저장에 실패했습니다.');
       }
@@ -47,6 +49,13 @@ function IntroEdit() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="제목을 입력하세요"
+        style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
+      />
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}

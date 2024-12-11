@@ -3,7 +3,7 @@ const Intro = require('../models/Intro');
 
 const router = express.Router();
 
-// 소개글 가져오기 (항상 한 개만 보여짐)
+// 소개글 가져오기 
 router.get('/', async (req, res) => {
   try {
     const intro = await Intro.findOne();
@@ -35,6 +35,28 @@ router.put('/', async (req, res) => {
   } catch (error) {
     console.error('Error saving intro:', error);
     res.status(500).json({ message: 'Error saving intro' });
+  }
+});
+
+// 소개글 저장 및 수정
+router.post('/', async (req, res) => {
+  console.log('POST /api/intro called with:', req.body);
+  try {
+    const { title, content } = req.body;
+
+    let intro = await Intro.findOne();
+    if (intro) {
+      intro.title = title;
+      intro.content = content;
+    } else {
+      intro = new Introduction({ title, content });
+    }
+
+    await intro.save();
+    res.status(200).json({ message: 'Introduction saved successfully' });
+  } catch (error) {
+    console.error('Error saving introduction:', error);
+    res.status(500).json({ message: 'Error saving introduction', error });
   }
 });
 

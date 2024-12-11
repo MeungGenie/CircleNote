@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAuth } from './context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css'
-import darakLogo from './darak_logo.png';
+import darakLogo from '../darak_logo.png';
 
 function Header() {
   const { authToken, user, logout } = useAuth();
