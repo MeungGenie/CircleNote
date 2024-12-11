@@ -1,36 +1,47 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 
-// AuthContext 생성
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [authToken, setAuthToken] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken') || null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // 로컬 스토리지에서 토큰 가져오기
-    const token = localStorage.getItem('token');
-    if (token) {
-      setAuthToken(token);
+    if (authToken) {
+      localStorage.setItem('authToken', authToken);
+      fetchUserProfile();
+    } else {
+      localStorage.removeItem('authToken');
+      setUser(null);
     }
-    setLoading(false);
-  }, []);
+  }, [authToken]);
 
-  const login = (token) => {
-    // 로그인 시 토큰을 로컬 스토리지에 저장
-    localStorage.setItem('token', token);
-    setAuthToken(token);
+  const fetchUserProfile = async () => {
+    try {
+      const response = await axios.get('/api/auth/profile', {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      setAuthToken(null);
+    }
   };
 
   const logout = () => {
-    // 로그아웃 시 로컬 스토리지에서 토큰 제거
-    localStorage.removeItem('token');
     setAuthToken(null);
+    setUser(null);
+    localStorage.removeItem('authToken');
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, setAuthToken, login, logout, loading }}>
+    <AuthContext.Provider value={{ authToken, setAuthToken, user, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);

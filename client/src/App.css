@@ -57,29 +57,39 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.header-container {
+  display: flex;
+  width: 80%;
+  padding-right: 100px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
 .logo-container {
-  position: relative; /* 부모 요소가 기준이 되도록 설정 */
+  flex: 1;
 }
 
 .auth-button-container {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  flex: 1;
+  text-align: right;
 }
 
 .auth-button {
-  padding: 10px 20px;
+  padding: 8px 16px;
   background-color: #007bff;
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  border-radius: 4px;
 }
 
 .auth-button:hover {
   background-color: #0056b3;
 }
 
+.logo {
+  height: 80px; /* 로고 크기 조절 */
+}
 
 .side-tabs {
   display: flex;
@@ -158,6 +168,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+*,
+body {
+  font-family: 'GmarketSans';
 }
 
 

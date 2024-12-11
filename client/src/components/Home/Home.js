@@ -1,25 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
-import logo from '../../darak_logo.png';
+import darakLogo from '../../darak_logo.png';
 
 function Home() {
+  const [notices, setNotices] = useState([]);
+  const [intro, setIntro] = useState([]);
+  const { userRole } = useAuth(); // 사용자 역할 확인
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [introResponse, noticeResponse] = await Promise.all([
+          fetch('http://localhost:5001/api/intro'),
+          fetch('http://localhost:5001/api/notices'),
+        ]);
+
+        if (introResponse.ok) {
+          const introData = await introResponse.json();
+          setIntro(introData);
+        }
+
+        if (noticeResponse.ok) {
+          const noticeData = await noticeResponse.json();
+          setNotices(noticeData);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+    
   return (
-    <div className="home-layout">
+    <div className="home-container">
       <div className="home-logo-container">
-        <img src={logo} alt="Club Logo" className="home-logo" />
+        <img src= {darakLogo} alt="로고" className="home-logo" />
       </div>
       <div className="home-info-container">
-        <div className="home-description">
-          <h2>동아리 소개글</h2>
-          <p>다락방은 ~~~</p>
+        <div className="home-introduction">
+          {intro ? (
+            <>
+              <h2>{intro.title}</h2>
+              {userRole === 'admin' && (
+                <button
+                onClick={() => navigate('/IntroEdit')} style={{ padding: '5px 10px', cursor: 'pointer' }}>
+                  수정
+                </button>
+              )}
+              <p>{intro.content}</p>
+            </>
+          ) : (
+            <p>소개글을 불러오는 중입니다...</p>
+          )}
         </div>
-        <div className="home-announcement">
-          <h3>📢 공지사항</h3>
-          <ul>
-            <li>공지 1</li>
-            <li>공지 2</li>
-          </ul>
-        </div>
+        <div className="home-notices">
+          <h2>📢 공지사항</h2>
+            {notices.length > 0 ? (
+            notices.map((notice) => (
+              <div key={notice._id}>
+                <h3>{notice.title}</h3>
+                <p>{notice.content}</p>
+              </div>
+            ))
+          ) : (
+            <p>공지사항이 없습니다.</p>
+          )}
+        </div>  
       </div>
     </div>
   );

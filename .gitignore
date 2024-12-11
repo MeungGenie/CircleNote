@@ -173,4 +173,7 @@ sketch
 .history
 .ionide
 
+#images
+server/uploads/
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,react

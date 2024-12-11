@@ -1,32 +1,24 @@
 import React from 'react';
-import './Header.css';
+import { useAuth } from './context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
+import './Header.css'
+import darakLogo from './darak_logo.png';
 
-function Header({ activeTab, setActiveTab }) {
-  const tabs = ['캘린더', '사진첩', '스터디', '다락부원'];
+function Header() {
+  const { authToken, user, logout } = useAuth();
+  const navigate = useNavigate();
 
-  return (
-    <div className="header">
-      <div className="tabs">
-        {tabs.map((tab) => (
-          <div
-            key={tab}
-            className={`tab ${activeTab === tab ? 'active' : ''}`}
-            style={{
-              backgroundColor: activeTab === tab
-                ? '#555' // 활성화된 탭의 색상
-                : tab === '캘린더'
-                ? '#F28C8C'
-                : tab === '사진첩'
-                ? '#FFD67E'
-                : tab === '스터디'
-                ? '#A8E6A2'
-                : '#88C5F1',
-            }}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab}
-          </div>
-        ))}
+  return ( 
+    <div className="header-container">
+      <div className="logo-container">
+        <img src= {darakLogo} alt="Club Logo" className="logo" />
+      </div>
+      <div className="auth-button-container">
+        {authToken ? (
+          <Link to="/profile" className="auth-button">회원정보</Link>
+        ) : (
+          <Link to="/login" className="auth-button">로그인</Link>
+        )}
       </div>
     </div>
   );
