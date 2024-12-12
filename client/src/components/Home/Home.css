@@ -8,16 +8,19 @@
 
 .home-logo-container {
   flex-shrink: 0;
-  max-width: 200px;
+  max-width: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 50px;
 }
 
 .home-logo {
   width: 100%;
   height: auto;
   object-fit: contain;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-info-container {
@@ -25,6 +28,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 80vh;
 }
 
 
@@ -66,11 +70,11 @@
 .home-container {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 20px;
-  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
   background-color: #f9f9f9;
+  gap: 30px;
 }
 
 .home-info-card {
@@ -98,6 +102,40 @@
   background-color: #4a8ac4;
 }
 
+.intro-edit-button {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../icons/edit.png');
+  background-color: #ffffff;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.intro-edit-button:hover {
+  opacity: 0.8; 
+}
+
+.notice-add-button {
+  width: 30px;
+  height: 30px;
+  background-image: url('../../icons/plus.png');
+  background-color: #ffffff;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.2s ease; 
+}
+
+.notice-add-button:hover {
+  opacity: 0.8; 
+}
+
 .home-introduction, .home-notices {
   background-color: #ffffff;
   padding: 15px;
@@ -113,4 +151,39 @@
   margin: 0;
   color: #555555;
   line-height: 1.6;
+}
+
+.title-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.image-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+}
+
+.notice-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.notice-title {
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.notice-title:hover {
+  color: #007bff;
+}
+
+.notice-timestamp {
+  font-size: 0.9em;
+  color: #888;
 }

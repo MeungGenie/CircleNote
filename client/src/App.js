@@ -13,6 +13,7 @@ import Profile from './components/Profile';
 import ProfileEdit from './components/ProfileEdit';
 import IntroEdit from './components/Home/IntroEdit';
 import NoticesEdit from './components/Home/NoticesEdit';
+import NoticeDetail from './components/Home/NoticeDetail';
 import './App.css';
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/edit" element={<ProfileEdit />} />
+                <Route path="/notices/edit" element={<NoticesEdit />} /> {/* 작성 */}
+                <Route path="/notices/edit/:id" element={<NoticesEdit />} /> {/* 수정 */}
+                <Route path="/notices/:id" element={<NoticeDetail />} />
               </Routes>
             </div>
             <div className="side-tabs">

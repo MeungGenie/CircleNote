@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { formatRelativeTime } from '../../utils/dateUtils';
 import './Home.css';
 import darakLogo from '../../darak_logo.png';
 
@@ -44,31 +45,34 @@ function Home() {
         <div className="home-introduction">
           {intro ? (
             <>
+            <div className="title-button-container">
               <h2>{intro.title}</h2>
               {userRole?.role === 'admin' && (
                 <button
-                onClick={() => navigate('/intro/edit')} className='edit-button'>
-                  수정
+                onClick={() => navigate('/intro/edit')} className='intro-edit-button'>
                 </button>
               )}
-              <p>{intro.content}</p>
+            </div>
+            <p>{intro.content}</p>
             </>
           ) : (
             <p>소개글을 불러오는 중입니다...</p>
           )}
         </div>
         <div className="home-notices">
-          <h2>📢 공지사항</h2>
-          {userRole?.role === 'admin' && (
-            <button onClick={() => navigate('/notices/edit')} className="edit-button">
-              글쓰기
-            </button>
+          <div className="title-button-container">
+            <h2>📢 공지사항</h2>
+            {userRole?.role === 'admin' && (
+              <button onClick={() => navigate('/notices/edit')} className="notice-add-button"/>
             )}
-            {notices.length > 0 ? (
+          </div>
+          {notices.length > 0 ? (
             notices.map((notice) => (
-              <div key={notice._id}>
-                <h3>{notice.title}</h3>
-                <p>{notice.content}</p>
+              <div key={notice._id} className="notice-item">
+                <Link to={`/notices/${notice._id}`} className="notice-title">
+                  {notice.title}
+                </Link>
+                <span className="notice-timestamp">{formatRelativeTime(notice.createdAt)}</span>
               </div>
             ))
           ) : (

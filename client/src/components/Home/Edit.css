@@ -1,0 +1,79 @@
+.edit-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    background-color: #f9f9f9;
+  }
+  
+  .edit-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .edit-card h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333333;
+  }
+  
+  .edit-input,
+  .edit-textarea {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .edit-input:focus,
+  .edit-textarea:focus {
+    border-color: #5b9bd5;
+    box-shadow: 0 0 5px rgba(91, 155, 213, 0.5);
+  }
+  
+  .edit-textarea {
+    resize: none;
+    height: 120px;
+  }
+  
+  .edit-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .edit-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-buttons .save-button {
+    background-color: #5b9bd5;
+    color: white;
+  }
+  
+  .edit-buttons .save-button:hover {
+    background-color: #4a8ac4;
+  }
+  
+  .edit-buttons .cancel-button {
+    background-color: #f0f0f0;
+    color: #555555;
+  }
+  
+  .edit-buttons .cancel-button:hover {
+    background-color: #e0e0e0;
+  }
+  

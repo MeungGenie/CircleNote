@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Edit.css';
 
 function IntroEdit() {
   const [title, setTitle] = useState('');
@@ -7,7 +8,6 @@ function IntroEdit() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 기존 소개글 가져오기
     const fetchIntro = async () => {
       try {
         const response = await fetch('http://localhost:5001/api/intro');
@@ -20,15 +20,13 @@ function IntroEdit() {
         console.error('Error fetching intro:', error);
       }
     };
-
     fetchIntro();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSave = async () => {
     try {
       const response = await fetch('http://localhost:5001/api/intro', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -36,35 +34,39 @@ function IntroEdit() {
       });
 
       if (response.ok) {
-        alert('동아리 소개글이 저장되었습니다.');
+        alert('소개글이 저장되었습니다.');
         navigate('/');
       } else {
-        alert('저장에 실패했습니다.');
+        alert('저장 실패');
       }
     } catch (error) {
       console.error('Error updating intro:', error);
-      alert('오류가 발생했습니다.');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="제목을 입력하세요"
-        style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
-      />
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="동아리 소개글을 입력하세요."
-        rows="6"
-        style={{ width: '100%', padding: '10px' }}
-      />
-      <button type="submit">저장</button>
-    </form>
+    <div className="edit-container">
+      <div className="edit-card">
+        <h2>소개글 수정</h2>
+        <input
+          className="edit-input"
+          type="text"
+          placeholder="제목"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <textarea
+          className="edit-textarea"
+          placeholder="내용"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <div className="edit-buttons">
+          <button className="save-button" onClick={handleSave}>저장</button>
+          <button className="cancel-button" onClick={() => navigate('/')}>취소</button>
+        </div>
+      </div>
+    </div>
   );
 }
 

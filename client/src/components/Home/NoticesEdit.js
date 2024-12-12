@@ -1,62 +1,81 @@
-// Updated NoticesEdit.js
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import './Edit.css';
 
 function NoticesEdit() {
-  const [notices, setNotices] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const { id } = useParams(); // 수정 중인 공지사항 ID (없으면 작성 모드)
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 기존 공지사항 가져오기
-    const fetchNotices = async () => {
-      try {
-        const response = await fetch('http://localhost:5001/api/notices');
-        if (response.ok) {
-          const data = await response.json();
-          setNotices(data.content || '');
+    if (id) {
+      const fetchNotice = async () => {
+        try {
+          const response = await fetch(`http://localhost:5001/api/notices/${id}`);
+          if (response.ok) {
+            const data = await response.json();
+            setTitle(data.title);
+            setContent(data.content);
+          }
+        } catch (error) {
+          console.error('Error fetching notice:', error);
         }
-      } catch (error) {
-        console.error('Error fetching notices:', error);
-      }
-    };
+      };
+      fetchNotice();
+    }
+  }, [id]);
 
-    fetchNotices();
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSave = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/notices', {
-        method: 'POST',
+      const url = id
+        ? `http://localhost:5001/api/notices/${id}`
+        : `http://localhost:5001/api/notices`;
+
+      const method = id ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content: notices }),
+        body: JSON.stringify({ title, content }),
       });
 
       if (response.ok) {
-        alert('공지사항이 저장되었습니다.');
-        navigate('/home');
+        alert(id ? '공지사항이 수정되었습니다.' : '공지사항이 작성되었습니다.');
+        navigate('/');
       } else {
-        alert('저장에 실패했습니다.');
+        alert('저장 실패');
       }
     } catch (error) {
-      console.error('Error updating notices:', error);
-      alert('오류가 발생했습니다.');
+      console.error('Error saving notice:', error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea
-        value={notices}
-        onChange={(e) => setNotices(e.target.value)}
-        placeholder="공지사항 내용을 입력하세요."
-        rows="6"
-        style={{ width: '100%', padding: '10px' }}
-      />
-      <button type="submit">저장</button>
-    </form>
+    <div className="edit-container">
+      <div className="edit-card">
+        <h2>{id ? '공지사항 수정' : '공지사항 작성'}</h2>
+        <input
+          className="edit-input"
+          type="text"
+          placeholder="제목"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <textarea
+          className="edit-textarea"
+          placeholder="내용"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <div className="edit-buttons">
+          <button className="save-button" onClick={handleSave}>저장</button>
+          <button className="cancel-button" onClick={() => navigate('/')}>취소</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
