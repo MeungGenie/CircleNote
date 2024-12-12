@@ -1,25 +1,61 @@
 .gallery-container {
-    padding: 20px;
-  }
-  
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  
-  .gallery-card {
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    background-color: #ffffff
-  }
-  
-  .folder-icon {
-    width: 50px;
-    height: auto;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* 부모 요소가 전체 공간을 차지하도록 설정 */
+  height: 100%; /* 필요에 따라 auto 또는 적절히 수정 */
+  max-width: none; /* max-width 제한 제거 */
+}
+
+
+.gallery-grid-container {
+  padding: 20px;
+}
+
+.gallery-other-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+
+.gallery-card {
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-folder-button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.add-folder-button:hover {
+  background-color: #45a049;
+}
+
+.folder-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}

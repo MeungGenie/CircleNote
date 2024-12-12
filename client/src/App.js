@@ -14,6 +14,8 @@ import ProfileEdit from './components/ProfileEdit';
 import IntroEdit from './components/Home/IntroEdit';
 import NoticesEdit from './components/Home/NoticesEdit';
 import NoticeDetail from './components/Home/NoticeDetail';
+import FolderCreate from './components/Gallery/FolderCreate';
+import Folder from './components/Gallery/Folder';
 import './App.css';
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
                 <Route path="/notices/edit" element={<NoticesEdit />} /> {/* 작성 */}
                 <Route path="/notices/edit/:id" element={<NoticesEdit />} /> {/* 수정 */}
                 <Route path="/notices/:id" element={<NoticeDetail />} />
+                <Route path="/gallery/:folderId" element={<Folder />} />
+                <Route path="/gallery/create" element={<FolderCreate />} />
               </Routes>
             </div>
             <div className="side-tabs">

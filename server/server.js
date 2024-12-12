@@ -8,6 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const introRoutes = require('./routes/introRoutes');
 const noticeRoutes = require('./routes/noticeRoutes');
 const scheduleRoutes = require('./routes/scheduleRoutes');
+const galleryRoutes = require('./routes/galleryRoutes');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true })); // URL-encoded �
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/uploads', express.static('uploads'));
+app.use('/uploads/photos', express.static('uploads/photos'));
 
 const PORT = process.env.PORT || 5000;
 
@@ -37,6 +39,8 @@ app.use('/api/auth', authRoutes); // 사용자 인증 관련
 app.use('/api/intro', introRoutes); // 동아리 소개글 관련
 app.use('/api/notices', noticeRoutes); // 공지사항 관련
 app.use('/api/schedules', scheduleRoutes); // 일정 관련
+app.use('/api/gallery', galleryRoutes); // 갤러리 관련
+
 
 // 서버 시작
 app.listen(PORT, () => {

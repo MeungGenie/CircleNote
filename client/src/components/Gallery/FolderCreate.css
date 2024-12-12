@@ -1,0 +1,75 @@
+.folder-create-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    background-color: #f9f9f9;
+  }
+  
+  .folder-create-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .folder-create-card h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .folder-create-card label {
+    font-size: 1em;
+    font-weight: 500;
+  }
+  
+  .folder-create-card input,
+  .folder-create-card button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+  
+  .folder-create-card input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 3px rgba(74, 144, 226, 0.5);
+  }
+  
+  .folder-create-card .file-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .folder-create-card .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .folder-create-card save-button {
+    background-color: #5b9bd5;
+    color: white;
+  }
+  
+  .folder-create-card save-button:hover {
+    background-color: #4a8ac4;
+  }
+  
+  .folder-create-card .cancel-button {
+    background-color: #f0f0f0;
+    color: #555555;
+  }
+  
+  .folder-create-card .cancel-button:hover {
+    background-color: #e0e0e0;
+  }
+  
