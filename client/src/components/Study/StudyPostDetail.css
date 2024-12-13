@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
+    overflow-y: auto; /* 세로 스크롤 추가 */
+    overflow-wrap: break-word; /* 텍스트 줄바꿈 처리 */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     height: 70vh; /* 화면 높이의 70% */

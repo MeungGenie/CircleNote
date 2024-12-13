@@ -26,7 +26,7 @@ function Login() {
         setUserRole(data.role); // 사용자 역할 설정
         localStorage.setItem('authToken', data.token); // 로컬 스토리지에 저장
         localStorage.setItem('userRole', data.role); // 역할 저장
-        navigate('/'); // 홈 화면으로 이동
+        navigate(`/?token=${data.token}`);
       } else {
         console.error('Login failed');
         alert('로그인 실패: 아이디나 비밀번호를 확인하세요.');

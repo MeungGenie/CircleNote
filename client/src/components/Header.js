@@ -11,7 +11,8 @@ function Header() {
   return ( 
     <div className="header-container">
       <div className="logo-container">
-        <img src= {darakLogo} alt="Club Logo" className="logo" />
+        <img src= {darakLogo} alt="Club Logo" className="logo" onClick={() => navigate('/')}
+          style={{ cursor: 'pointer' }}/>
       </div>
       <div className="auth-button-container">
         {authToken ? (

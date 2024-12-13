@@ -37,6 +37,22 @@ function StudyPostDetail() {
         setCommentContent('');
     };
 
+    const renderContentWithLinks = (content) => {
+        return content.split('\n').map((line, index) => (
+            <p key={index} style={{ margin: '0 0 10px 0' }}>
+                {line.split(/(https?:\/\/\S+)/g).map((part, i) => 
+                    part.match(/https?:\/\/\S+/) ? (
+                        <a key={i} href={part} target="_blank" rel="noopener noreferrer">
+                            {part}
+                        </a>
+                    ) : (
+                        part
+                    )
+                )}
+            </p>
+        ));
+    };
+
     const handleDeleteComment = async (commentId) => {
         if (!commentId) return; // Avoid invalid API calls
     
@@ -64,29 +80,28 @@ function StudyPostDetail() {
         <div className="study-post-detail-container">
             <h1>{post.title}</h1>
             <div className="study-post-content-container">
-                <div className="post-content-container">
-                    {post.content.split('\n').map((line, index) => (
-                        <p key={index} style={{ margin: '0 0 10px 0' }}>{line}</p>
-                    ))}
-                </div>
-                <div class="separator"></div>
-                <div className="post-comments-container">
-                    <h3>댓글</h3>
-                    <div className="comment-scroll">
-                        {post.comments.map((comment) => (
-                            <div key={comment._id} className='comment-button-container'>
-                            <p><strong>{comment.author.name}</strong>: {comment.content}</p>
-                            {comment.author._id === userRole._id && (
-                                <button onClick={() => handleDeleteComment(comment._id)} className="comment-delete-button"></button>
-                            )}
-                            </div>
-                        ))}
+                {renderContentWithLinks(post.content)}
+                {/*
+                    <div class="separator"></div>
+                    <div className="post-comments-container">
+                        <h3>댓글</h3>
+                        <div className="comment-scroll">
+                            {post.comments.map((comment) => (
+                                <div key={comment._id} className='comment-button-container'>
+                                <p><strong>{comment.author.name}</strong>: {comment.content}</p>
+                                {comment.author._id === userRole._id && (
+                                    <button onClick={() => handleDeleteComment(comment._id)} className="comment-delete-button"></button>
+                                )}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="comment-button-container"> 
+                            <textarea value={commentContent} onChange={(e) => setCommentContent(e.target.value)} className='comment-input'/>
+                            <button onClick={handleAddComment} className='comment-button'>작성</button>
+                        </div>
                     </div>
-                    <div className="comment-button-container"> 
-                        <textarea value={commentContent} onChange={(e) => setCommentContent(e.target.value)} className='comment-input'/>
-                        <button onClick={handleAddComment} className='comment-button'>작성</button>
-                    </div>
-                </div>
+                    */
+                }
             </div>
         </div>
     ) : (

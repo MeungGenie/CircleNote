@@ -20,6 +20,7 @@ import StudyCreate from './components/Study/StudyCreate';
 import StudyRoom from './components/Study/StudyRoom';
 import StudyPostCreate from './components/Study/StudyPostCreate';
 import StudyPostDetail from './components/Study/StudyPostDetail';
+import AutoLogin from './components/AutoLogin';
 import './App.css';
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/study" element={<Study />} />
                 <Route path="/members" element={<Members />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/auto-login" element={<AutoLogin />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/edit" element={<ProfileEdit />} />
