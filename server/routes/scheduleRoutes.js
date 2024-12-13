@@ -26,4 +26,30 @@ router.post('/', async (req, res) => {
   }
 });
 
+// 일정 수정하기
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+  try {
+    const updatedSchedule = await Schedule.findByIdAndUpdate(id, { title }, { new: true });
+    res.json(updatedSchedule);
+  } catch (error) {
+    console.error('Error updating schedule:', error);
+    res.status(500).json({ message: 'Error updating schedule' });
+  }
+});
+
+// 일정 삭제하기
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Schedule.findByIdAndDelete(id);
+    res.status(204).send();
+  } catch (error) {
+    console.error('Error deleting schedule:', error);
+    res.status(500).json({ message: 'Error deleting schedule' });
+  }
+});
+
+
 module.exports = router;

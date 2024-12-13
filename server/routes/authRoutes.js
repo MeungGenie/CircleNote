@@ -104,6 +104,7 @@ router.get('/profile', authMiddleware, async (req, res) => {
     }
     console.log('User found:', user);
     res.json({
+      _id: user._id,
       username: user.username,
       name: user.name,
       role: user.role,

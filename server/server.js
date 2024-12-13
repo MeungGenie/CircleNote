@@ -9,6 +9,7 @@ const introRoutes = require('./routes/introRoutes');
 const noticeRoutes = require('./routes/noticeRoutes');
 const scheduleRoutes = require('./routes/scheduleRoutes');
 const galleryRoutes = require('./routes/galleryRoutes');
+const studyRoutes = require('./routes/studyRoutes');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use('/api/intro', introRoutes); // 동아리 소개글 관련
 app.use('/api/notices', noticeRoutes); // 공지사항 관련
 app.use('/api/schedules', scheduleRoutes); // 일정 관련
 app.use('/api/gallery', galleryRoutes); // 갤러리 관련
+app.use('/api/study', studyRoutes); // 스터디 관련
 
 
 // 서버 시작

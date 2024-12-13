@@ -16,6 +16,10 @@ import NoticesEdit from './components/Home/NoticesEdit';
 import NoticeDetail from './components/Home/NoticeDetail';
 import FolderCreate from './components/Gallery/FolderCreate';
 import Folder from './components/Gallery/Folder';
+import StudyCreate from './components/Study/StudyCreate';
+import StudyRoom from './components/Study/StudyRoom';
+import StudyPostCreate from './components/Study/StudyPostCreate';
+import StudyPostDetail from './components/Study/StudyPostDetail';
 import './App.css';
 
 function App() {
@@ -44,6 +48,10 @@ function App() {
                 <Route path="/notices/:id" element={<NoticeDetail />} />
                 <Route path="/gallery/:folderId" element={<Folder />} />
                 <Route path="/gallery/create" element={<FolderCreate />} />
+                <Route path="/study/create" element={<StudyCreate />} /> {/* 스터디룸 생성 */}
+                <Route path="/study/:id" element={<StudyRoom />} /> {/* 스터디룸 상세 */}
+                <Route path="/study/:id/create-post" element={<StudyPostCreate />} />
+                <Route path="/study/:studyRoomId/posts/:postId" element={<StudyPostDetail />} />
               </Routes>
             </div>
             <div className="side-tabs">

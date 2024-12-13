@@ -1,0 +1,63 @@
+.study-create-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    background-color: #f9f9f9;
+  }
+
+  .study-create-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+
+  .study-create-card h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .study-create-card input,
+  .study-create-card button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+  
+  .study-create-card input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 3px rgba(74, 144, 226, 0.5);
+  }
+  
+  .study-create-button:hover {
+    background-color: #4a8ac4;
+  }
+  
+
+  .study-input,
+  .study-textarea {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .study-input:focus,
+  .study-textarea:focus {
+    border-color: #5b9bd5;
+    box-shadow: 0 0 5px rgba(91, 155, 213, 0.5);
+  }

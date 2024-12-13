@@ -1,0 +1,126 @@
+.study-post-detail-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 70vh; /* 화면 높이의 70% */
+    max-width: 800px; /* 최대 가로 너비 */
+    margin: 0 auto; /* 화면 중앙 정렬 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.study-post-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 80%; /* 컨테이너 전체 높이 */
+}
+
+.post-content-container {
+    flex: 1; /* 컨테이너의 절반을 차지 */
+    overflow-y: auto; /* 세로 스크롤 추가 */
+    overflow-wrap: break-word; /* 텍스트 줄바꿈 처리 */
+    word-wrap: break-word; /* 긴 단어를 줄바꿈 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box; /* 패딩 포함 */
+    height: 100%; /* 부모 높이에 맞게 확장 */
+}
+
+.post-content-container p {
+    margin: 0;
+    line-height: 1.5; /* 줄 간격 조절 */
+    word-wrap: break-word; /* 단어가 너무 길 경우 줄바꿈 */
+}
+
+.post-content-container a {
+    word-break: break-word; /* 긴 단어 또는 URL 줄바꿈 */
+    color: #5b9bd5; /* 링크 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+.post-content-container a:hover {
+    text-decoration: underline; /* 링크에 호버 시 밑줄 추가 */
+}
+
+.post-comments-container {
+    flex: 1; /* 컨테이너의 절반을 차지 */
+    overflow-y: auto; /* 스크롤 추가 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box; /* 패딩 포함 */
+}
+
+
+.comment-scroll {
+    max-height: 100%; /* 컨테이너 높이에 맞게 */
+    overflow-y: auto; /* 댓글 영역 스크롤 가능 */
+    padding: 8px;          
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.comment-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    gap:20px;
+    display: flex;
+  }
+
+.separator::before {
+    content: "";                 
+    display: block;               
+    height: 1px;                  
+    background-color: #ccc;       
+    margin: 16px 0;              
+  }
+
+.comment-delete-button {
+    width: 16px;
+    height: 16px;
+    background-image: url('../../icons/x.png');
+    background-color: #ffffff;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.comment-delete-button:hover {
+    opacity: 0.8; 
+  }
+
+.comment-input {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    outline: none;
+}
+
+.comment-input:focus{
+    border-color: #5b9bd5;
+    box-shadow: 0 0 5px rgba(91, 155, 213, 0.5);
+}
+
+.comment-button {
+    background-color: #5b9bd5;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    color: white;
+  }
+  
+  .comment-button:hover {
+    background-color: #4a8ac4;
+  }

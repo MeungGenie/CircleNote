@@ -8,6 +8,7 @@ const localizer = momentLocalizer(moment);
 
 function ClubCalendar() {
   const [events, setEvents] = useState([]);
+  const [contextMenu, setContextMenu] = useState(null);
 
   useEffect(() => {
     const fetchSchedules = async () => {
@@ -28,6 +29,56 @@ function ClubCalendar() {
 
     fetchSchedules();
   }, []);
+
+  const handleEventRightClick = (event, e) => {
+    e.preventDefault();
+    setContextMenu({
+      mouseX: e.clientX,
+      mouseY: e.clientY,
+      event,
+    });
+  };
+
+  const closeContextMenu = () => {
+    setContextMenu(null);
+  };
+
+  const handleEdit = async () => {
+    const newTitle = window.prompt('수정할 제목을 입력해주세요', contextMenu.event.title);
+    if (newTitle) {
+      try {
+        const response = await fetch(`http://localhost:5001/api/schedules/${contextMenu.event._id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: newTitle }),
+        });
+        if (response.ok) {
+          setEvents((prevEvents) =>
+            prevEvents.map((evt) =>
+              evt._id === contextMenu.event._id ? { ...evt, title: newTitle } : evt
+            )
+          );
+        }
+      } catch (error) {
+        console.error('Error updating the event:', error);
+      }
+    }
+    closeContextMenu();
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:5001/api/schedules/${contextMenu.event._id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        setEvents((prevEvents) => prevEvents.filter((evt) => evt._id !== contextMenu.event._id));
+      }
+    } catch (error) {
+      console.error('Error deleting the event:', error);
+    }
+    closeContextMenu();
+  };
 
   // 새로운 일정 추가
   const handleSelectSlot = async ({ start, end }) => {
@@ -60,7 +111,7 @@ function ClubCalendar() {
   };
 
   return (
-    <div className="calendar-container">
+    <div className="calendar-container" onClick={closeContextMenu}>
       <BigCalendar
         localizer={localizer}
         events={events}
@@ -78,7 +129,24 @@ function ClubCalendar() {
           day: "일",
           agenda: "일정",
         }}
+        onDoubleClickEvent={(event, e) => handleEventRightClick(event, e)}
       />
+      {contextMenu && (
+        <div
+          className="context-menu"
+          style={{
+            position: 'absolute',
+            top: contextMenu.mouseY,
+            left: contextMenu.mouseX,
+            backgroundColor: 'white',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+            zIndex: 1000,
+          }}
+        >
+          <button onClick={handleEdit}>수정</button>
+          <button onClick={handleDelete}>삭제</button>
+        </div>
+      )}
     </div>
   );
 }
