@@ -26,6 +26,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+
 // 일정 수정하기
 router.put('/:id', async (req, res) => {
   const { id } = req.params;

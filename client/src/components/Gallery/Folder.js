@@ -18,7 +18,7 @@ function Folder() {
 
     const fetchFolder = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/gallery/${folderId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/gallery/${folderId}`, {
             headers: { Authorization: `Bearer ${authToken}` },
         });
         if (response.ok) {
@@ -44,7 +44,7 @@ function Folder() {
     formData.append('photo', uploadedFile);
 
     try {
-        const response = await fetch(`http://localhost:5001/api/gallery/${folderId}/add-photo`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/gallery/${folderId}/add-photo`, {
             method: 'POST',
             headers: { Authorization: `Bearer ${authToken}` },
             body: formData,
@@ -71,7 +71,7 @@ const handleDeletePhoto = async (imageUrl) => {
 
         console.log(selectedImage)
         
-        const response = await fetch(`http://localhost:5001/api/gallery/${folderId}/delete-photo`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/gallery/${folderId}/delete-photo`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ const handleImageSelect = (imageUrl) => {
                 {folder?.images.map((image, index) => (
                 <img
                     key={index}
-                    src={`http://localhost:5001/${image}`}
+                    src={`${process.env.REACT_APP_API_URL}/${image}`}
                     alt={`Gallery ${index}`}
                     className={`gallery-thumbnail ${selectedImage === image ? 'selected' : ''}`}
                     onClick={() => handleImageSelect(image)}
@@ -133,7 +133,7 @@ const handleImageSelect = (imageUrl) => {
             </div>
             <div className="gallery-preview">
                 {selectedImage ? (
-                <img src={`http://localhost:5001/${selectedImage}`} alt="Selected" />
+                <img src={`${process.env.REACT_APP_API_URL}/${selectedImage}`} alt="Selected" />
                 ) : (
                 <p>이미지를 선택하세요</p>
                 )}

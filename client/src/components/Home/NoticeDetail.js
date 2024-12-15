@@ -11,7 +11,7 @@ function NoticeDetail() {
   useEffect(() => {
     const fetchNotice = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/notices/${id}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/notices/${id}`);
         if (response.ok) {
           const data = await response.json();
           setNotice(data);

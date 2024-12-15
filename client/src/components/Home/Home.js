@@ -15,8 +15,8 @@ function Home() {
     const fetchData = async () => {
       try {
         const [introResponse, noticeResponse] = await Promise.all([
-          fetch('http://localhost:5001/api/intro'),
-          fetch('http://localhost:5001/api/notices'),
+          fetch(`${process.env.REACT_APP_API_URL}/api/intro`),
+          fetch(`${process.env.REACT_APP_API_URL}/api/notices`),
         ]);
 
         if (introResponse.ok) {

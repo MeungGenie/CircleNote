@@ -11,7 +11,7 @@ function StudyPostDetail() {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await fetch(`http://localhost:5001/api/study/${studyRoomId}/posts/${postId}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/study/${studyRoomId}/posts/${postId}`, {
                     headers: { Authorization: `Bearer ${authToken}` },
                 });
                 const data = await response.json();
@@ -24,7 +24,7 @@ function StudyPostDetail() {
     }, [studyRoomId, postId]);
 
     const handleAddComment = async () => {
-        const response = await fetch(`http://localhost:5001/api/study/${studyRoomId}/posts/${postId}/comments`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/study/${studyRoomId}/posts/${postId}/comments`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ function StudyPostDetail() {
         if (!commentId) return; // Avoid invalid API calls
     
         const response = await fetch(
-            `http://localhost:5001/api/study/${studyRoomId}/posts/${postId}/comments/${commentId}`,
+            `${process.env.REACT_APP_API_URL}/api/study/${studyRoomId}/posts/${postId}/comments/${commentId}`,
             {
                 method: 'DELETE',
                 headers: {

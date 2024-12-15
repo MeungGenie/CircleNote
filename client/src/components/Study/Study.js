@@ -12,7 +12,7 @@ function Study() {
   useEffect(() => {
     const fetchStudyRooms = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/study', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/study`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${authToken}`,
