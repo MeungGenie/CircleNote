@@ -13,7 +13,7 @@ function ClubCalendar() {
   useEffect(() => {
     const fetchSchedules = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/schedules`);
+        const response = await fetch("/api/schedules");
         const data = await response.json();
         setEvents(
           data.map((event) => ({
@@ -47,7 +47,7 @@ function ClubCalendar() {
     const newTitle = window.prompt('수정할 제목을 입력해주세요', contextMenu.event.title);
     if (newTitle) {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/schedules/${contextMenu.event._id}`, {
+        const response = await fetch(`/api/schedules/${contextMenu.event._id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ title: newTitle }),
@@ -68,7 +68,7 @@ function ClubCalendar() {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/schedules/${contextMenu.event._id}`, {
+      const response = await fetch(`/api/schedules/${contextMenu.event._id}`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -86,7 +86,7 @@ function ClubCalendar() {
     if (title) {
       const newEvent = { title, start, end };
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/schedules`, {
+        const response = await fetch(`/api/schedules`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newEvent),

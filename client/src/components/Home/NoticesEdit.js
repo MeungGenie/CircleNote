@@ -12,7 +12,7 @@ function NoticesEdit() {
     if (id) {
       const fetchNotice = async () => {
         try {
-          const response = await fetch(`${process.env.REACT_APP_API_URL}/api/notices/${id}`);
+          const response = await fetch(`/api/notices/${id}`);
           if (response.ok) {
             const data = await response.json();
             setTitle(data.title);
@@ -29,8 +29,8 @@ function NoticesEdit() {
   const handleSave = async () => {
     try {
       const url = id
-        ? `${process.env.REACT_APP_API_URL}/api/notices/${id}`
-        : `${process.env.REACT_APP_API_URL}/api/notices`;
+        ? `/api/notices/${id}`
+        : "/api/notices";
 
       const method = id ? 'PUT' : 'POST';
 

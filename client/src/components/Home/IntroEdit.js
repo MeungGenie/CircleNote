@@ -10,7 +10,7 @@ function IntroEdit() {
   useEffect(() => {
     const fetchIntro = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/intro`);
+        const response = await fetch("/api/intro");
         if (response.ok) {
           const data = await response.json();
           setTitle(data.title || '');
@@ -25,7 +25,7 @@ function IntroEdit() {
 
   const handleSave = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/intro`, {
+      const response = await fetch("/api/intro", {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

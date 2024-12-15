@@ -31,7 +31,7 @@ function Profile() {
         <div className="profile-details">
           <div className="profile-avatar-container">
             <img
-              src={`${process.env.REACT_APP_API_URL}/${userRole?.profileImage || 'default-avatar.png'}`}
+              src={`/${userRole?.profileImage || 'default-avatar.png'}`}
               alt="프로필 사진"
               className="profile-avatar"
             />

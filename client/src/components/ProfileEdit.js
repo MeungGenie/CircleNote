@@ -11,7 +11,7 @@ function ProfileEdit() {
   const [profileImageFile, setProfileImageFile] = useState(null);
   const [preview, setPreview] = useState(
     userRole?.profileImage
-      ? `${process.env.REACT_APP_API_URL}/${userRole.profileImage}`
+      ? `/${userRole.profileImage}`
       : 'default-avatar.png'
   );
 
@@ -36,7 +36,7 @@ function ProfileEdit() {
         formData.append('profileImage', profileImageFile);
       }
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/profile`, {
+      const response = await fetch("/api/auth/profile", {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${authToken}`,

@@ -22,7 +22,7 @@ function FolderCreate() {
     }
   
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/gallery`, {
+      const response = await fetch(`/api/gallery`, {
         method: 'POST',
         body: formData,
       });

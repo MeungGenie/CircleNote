@@ -14,7 +14,7 @@ function StudyPostCreate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/study/${id}/posts`, {
+      const response = await fetch(`/api/study/${id}/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

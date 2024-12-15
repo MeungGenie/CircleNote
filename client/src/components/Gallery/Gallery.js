@@ -18,7 +18,7 @@ function Gallery() {
 
   useEffect(() => {
     const fetchFolders = async () => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/gallery`);
+      const response = await fetch("/api/gallery");
       const data = await response.json();
       setFolders(data);
     };

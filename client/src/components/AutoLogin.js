@@ -16,7 +16,7 @@ function AutoLogin() {
       setAuthToken(token);
 
       // 사용자 역할 가져오기
-      fetch(`${process.env.REACT_APP_API_URL}/api/auth/profile`, {
+      fetch(`/api/auth/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())

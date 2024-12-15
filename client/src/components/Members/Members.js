@@ -7,7 +7,7 @@ function Members() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/members`); // Adjust API endpoint as needed
+        const response = await fetch("/api/members"); // Adjust API endpoint as needed
         const data = await response.json();
         setMembers(data);
       } catch (error) {
